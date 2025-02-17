@@ -4,9 +4,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Globe, Wand2, FileText, AlertTriangle } from "lucide-react";
 
+type BaseMessage = {
+  type: "user" | "bot";
+  text: string;
+};
+
+type OptionsMessage = BaseMessage & {
+  options: string[];
+  analysis?: never;
+};
+
+type AnalysisMessage = BaseMessage & {
+  options?: never;
+  analysis?: {
+    confidence: string;
+    recommendation: string;
+    urgency: string;
+  };
+};
+
+type Message = OptionsMessage | AnalysisMessage;
+
 export const ChatBot = () => {
-  const [messages, setMessages] = useState([
-    { type: "bot", text: "Select your preferred language / Seleccione su idioma / 选择您的语言", options: ["English", "Español", "中文"] }
+  const [messages, setMessages] = useState<Message[]>([
+    { 
+      type: "bot", 
+      text: "Select your preferred language / Seleccione su idioma / 选择您的语言", 
+      options: ["English", "Español", "中文"]
+    }
   ]);
   const [input, setInput] = useState("");
   const [language, setLanguage] = useState("");
@@ -20,7 +45,7 @@ export const ChatBot = () => {
 
   const handleSend = () => {
     if (!input.trim()) return;
-    setMessages([...messages, { type: "user", text: input }]);
+    setMessages([...messages, { type: "user", text: input } as Message]);
     setInput("");
     // Simulate AI response
     setTimeout(() => {
@@ -34,7 +59,7 @@ export const ChatBot = () => {
             recommendation: "Schedule consultation",
             urgency: "Medium"
           }
-        }
+        } as Message
       ]);
     }, 1000);
   };

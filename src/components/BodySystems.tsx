@@ -1,5 +1,5 @@
 
-import { HeartPulse, Brain, Lungs, Activity, AlertTriangle } from "lucide-react";
+import { HeartPulse, Brain, Stethoscope, Activity, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const BodySystems = () => {
@@ -18,7 +18,7 @@ export const BodySystems = () => {
     {
       name: "Respiratory",
       status: "Good",
-      icon: <Lungs className="w-8 h-8 text-primary" />,
+      icon: <Stethoscope className="w-8 h-8 text-primary" />,
       details: "O2 Sat: 98%, RR: 16/min",
       metrics: {
         risk: "Low",
