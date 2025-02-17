@@ -135,25 +135,23 @@ const Dashboard = () => {
         </div>
 
         <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-lg rounded-full px-6 py-3 shadow-xl border border-gray-100 z-50">
-          <Tabs defaultValue={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="flex items-center gap-4 bg-transparent">
-              {tabs.map((tab) => (
-                <TabsTrigger
-                  key={tab.id}
-                  value={tab.id}
-                  className={`p-2 rounded-full transition-all duration-200 ${
-                    activeTab === tab.id
-                      ? "bg-primary text-white shadow-lg scale-110"
-                      : "text-gray-500 hover:bg-secondary hover:text-primary"
-                  }`}
-                >
-                  <tab.icon size={24} />
-                  <span className="sr-only">{tab.label}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {/* TabsContent components would go here if needed */}
-          </Tabs>
+          <TabsList className="flex items-center gap-4 bg-transparent">
+            {tabs.map((tab) => (
+              <TabsTrigger
+                key={tab.id}
+                value={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`p-2 rounded-full transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? "bg-primary text-white shadow-lg scale-110"
+                    : "text-gray-500 hover:bg-secondary hover:text-primary"
+                }`}
+              >
+                <tab.icon size={24} />
+                <span className="sr-only">{tab.label}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
         </nav>
       </div>
     </div>
