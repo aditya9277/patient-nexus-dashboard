@@ -42,11 +42,12 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary to-background p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
         <header className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
             <h1 className="text-2xl font-bold text-primary">HealthBot</h1>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {quickActions.map((action, index) => (
                 <Button
                   key={index}
@@ -55,7 +56,7 @@ const Dashboard = () => {
                   size="sm"
                 >
                   {action.icon}
-                  <span className="ml-2 hidden md:inline">{action.label}</span>
+                  <span className="ml-2 hidden md:inline truncate max-w-[100px]">{action.label}</span>
                 </Button>
               ))}
             </div>
@@ -74,7 +75,7 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Feature Highlights */}
-          <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg animate-fade-in">
+          <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg">
             <h2 className="text-lg font-semibold mb-4">Quick Access</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {features.map((feature, index) => (
@@ -83,9 +84,11 @@ const Dashboard = () => {
                   variant="outline"
                   className="h-auto p-4 flex flex-col items-center gap-2 hover:bg-secondary/50 transition-all"
                 >
-                  {feature.icon}
-                  <span className="font-medium">{feature.label}</span>
-                  <span className="text-xs text-gray-500 text-center">
+                  <div className="w-8 h-8 flex items-center justify-center">
+                    {feature.icon}
+                  </div>
+                  <span className="font-medium text-sm text-center">{feature.label}</span>
+                  <span className="text-xs text-gray-500 text-center line-clamp-2 min-h-[2.5rem]">
                     {feature.description}
                   </span>
                 </Button>
@@ -93,24 +96,32 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          <Card className="col-span-1 md:col-span-2 lg:col-span-1 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg animate-fade-in">
-            <ChatBot />
+          <Card className="col-span-1 md:col-span-2 lg:col-span-1 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg overflow-hidden">
+            <div className="h-full overflow-y-auto">
+              <ChatBot />
+            </div>
           </Card>
 
-          <Card className="col-span-1 md:col-span-2 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg animate-fade-in">
-            <HealthMetrics />
+          <Card className="col-span-1 md:col-span-2 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg overflow-hidden">
+            <div className="h-full overflow-y-auto">
+              <HealthMetrics />
+            </div>
           </Card>
 
-          <Card className="p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg animate-fade-in">
-            <Appointments />
+          <Card className="p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg overflow-hidden">
+            <div className="h-full overflow-y-auto">
+              <Appointments />
+            </div>
           </Card>
 
-          <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg animate-fade-in">
-            <BodySystems />
+          <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/80 backdrop-blur-lg border-none shadow-lg overflow-hidden">
+            <div className="h-full overflow-y-auto">
+              <BodySystems />
+            </div>
           </Card>
         </div>
 
-        <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-lg rounded-full px-6 py-4 shadow-lg">
+        <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-lg rounded-full px-6 py-4 shadow-lg z-50">
           <div className="flex items-center gap-8">
             <button
               onClick={() => setActiveTab("metrics")}
