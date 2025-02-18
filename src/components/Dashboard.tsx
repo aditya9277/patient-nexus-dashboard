@@ -19,7 +19,21 @@ import {
   Stethoscope,
   UserRound,
   Bell,
-  Sun
+  Sun,
+  Pill,
+  Dna,
+  Laptop,
+  Wallet,
+  Utensils,
+  Baby,
+  Heart,
+  TreePine,
+  Dumbbell,
+  Target,
+  ScrollText,
+  Users,
+  BadgeAlert,
+  Car
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -27,19 +41,90 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("metrics");
 
   const quickActions = [
-    { icon: <AlertTriangle className="w-5 h-5" />, label: "Emergency", color: "bg-red-500" },
-    { icon: <Microscope className="w-5 h-5" />, label: "Lab Results", color: "bg-purple-500" },
-    { icon: <ImagePlus className="w-5 h-5" />, label: "Upload Scan", color: "bg-blue-500" },
-    { icon: <FileText className="w-5 h-5" />, label: "Reports", color: "bg-green-500" },
+    { icon: <BadgeAlert className="w-5 h-5" />, label: "Critical Alert: Blood Sugar High", color: "bg-red-500" },
+    { icon: <Pill className="w-5 h-5" />, label: "Medication Due: Metformin", color: "bg-purple-500" },
+    { icon: <Car className="w-5 h-5" />, label: "Hospital Parking: A4-123", color: "bg-blue-500" },
+    { icon: <ScrollText className="w-5 h-5" />, label: "New Test Results", color: "bg-green-500" },
   ];
 
   const features = [
-    { icon: <Stethoscope />, label: "Symptom Check", description: "AI-powered health assessment" },
-    { icon: <ImagePlus />, label: "Imaging Analysis", description: "Advanced medical scan analysis" },
-    { icon: <Brain />, label: "Decision Support", description: "Clinical decision assistance" },
-    { icon: <FileText />, label: "Report Generation", description: "Automated health reports" },
-    { icon: <Globe />, label: "Language Options", description: "Multi-lingual support" },
-    { icon: <AlertTriangle />, label: "Emergency Tools", description: "Quick emergency response" },
+    { 
+      icon: <Heart />, 
+      label: "Health Hub", 
+      description: "Track vitals, medications & appointments",
+      notifications: 3
+    },
+    { 
+      icon: <Brain />, 
+      label: "Mental Wellness", 
+      description: "Meditation, mood tracking & therapy",
+      notifications: 1
+    },
+    { 
+      icon: <Dumbbell />, 
+      label: "Fitness Journey", 
+      description: "Workouts, nutrition & progress",
+      notifications: 2
+    },
+    { 
+      icon: <Utensils />, 
+      label: "Nutrition AI", 
+      description: "Personalized meal plans & tracking",
+      notifications: 0
+    },
+    { 
+      icon: <Users />, 
+      label: "Family Health", 
+      description: "Manage family medical records",
+      notifications: 1
+    },
+    { 
+      icon: <Wallet />, 
+      label: "Insurance Hub", 
+      description: "Claims, coverage & expenses",
+      notifications: 2
+    },
+    { 
+      icon: <TreePine />, 
+      label: "Lifestyle", 
+      description: "Work-life balance & habits",
+      notifications: 0
+    },
+    { 
+      icon: <Target />, 
+      label: "Goals & Plans", 
+      description: "Health objectives & milestones",
+      notifications: 4
+    },
+    { 
+      icon: <Laptop />, 
+      label: "Telemedicine", 
+      description: "Virtual consultations & chats",
+      notifications: 1
+    },
+    { 
+      icon: <Dna />, 
+      label: "Genomics", 
+      description: "DNA insights & personalized care",
+      notifications: 0
+    }
+  ];
+
+  const todayHighlights = [
+    "🎯 Achieved 8,500 steps - 85% of daily goal",
+    "💊 All morning medications taken",
+    "🩺 Dr. Smith appointment confirmed for 2:30 PM",
+    "❤️ Blood pressure trending normal this week",
+    "🧘‍♂️ Complete 2 mindfulness sessions",
+    "🥗 Stay under 2000mg sodium today"
+  ];
+
+  const upcomingTasks = [
+    "Lab work at Quest Diagnostics - Tomorrow 9:00 AM",
+    "Refill Prescription #4589 - 3 days left",
+    "Annual Physical Examination - Next week",
+    "Dental Cleaning - In 2 weeks",
+    "Update Insurance Information - This month"
   ];
 
   return (
@@ -90,32 +175,61 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Greeting Card */}
           <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/90 backdrop-blur-lg border-none shadow-lg overflow-hidden">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <div className="flex items-center gap-2">
                   <Sun className="w-6 h-6 text-yellow-500" />
                   <h2 className="text-xl font-semibold text-gray-800">Good Morning, John</h2>
                 </div>
-                <p className="text-gray-600 mt-1">Here's your health summary for today</p>
+                <p className="text-gray-600 mt-1">Today's Personalized Health Journey</p>
               </div>
               <Button variant="outline" className="gap-2">
                 <Calendar className="w-4 h-4" />
                 View Schedule
               </Button>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="bg-secondary/30 rounded-lg p-4">
+                <h3 className="font-medium mb-2 flex items-center gap-2">
+                  <Target className="w-4 h-4 text-primary" />
+                  Today's Highlights
+                </h3>
+                <ul className="space-y-2">
+                  {todayHighlights.map((highlight, index) => (
+                    <li key={index} className="text-sm text-gray-600">{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-secondary/30 rounded-lg p-4">
+                <h3 className="font-medium mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  Upcoming Tasks
+                </h3>
+                <ul className="space-y-2">
+                  {upcomingTasks.map((task, index) => (
+                    <li key={index} className="text-sm text-gray-600">{task}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </Card>
 
           {/* Feature Highlights */}
           <Card className="col-span-1 md:col-span-2 lg:col-span-3 p-6 bg-white/90 backdrop-blur-lg border-none shadow-lg overflow-hidden">
-            <h2 className="text-lg font-semibold mb-4">Quick Access</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <h2 className="text-lg font-semibold mb-4">Life & Health Hub</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {features.map((feature, index) => (
                 <Button
                   key={index}
                   variant="outline"
-                  className="h-auto p-4 flex flex-col items-center gap-2 hover:bg-secondary/50 transition-all group"
+                  className="h-auto p-4 flex flex-col items-center gap-2 hover:bg-secondary/50 transition-all group relative"
                 >
-                  <div className="w-8 h-8 flex items-center justify-center bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
+                  {feature.notifications > 0 && (
+                    <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center">
+                      {feature.notifications}
+                    </span>
+                  )}
+                  <div className="w-10 h-10 flex items-center justify-center bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
                     {feature.icon}
                   </div>
                   <span className="font-medium text-sm text-center">{feature.label}</span>
