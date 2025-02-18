@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { ChatBot } from "./ChatBot";
@@ -52,71 +51,85 @@ const Dashboard = () => {
       icon: <Heart />, 
       label: "Health Hub", 
       description: "Track vitals, medications & appointments",
-      notifications: 3
+      notifications: 3,
+      details: "3 medications due today"
     },
     { 
       icon: <Brain />, 
       label: "Mental Wellness", 
       description: "Meditation, mood tracking & therapy",
-      notifications: 1
+      notifications: 1,
+      details: "New meditation session available"
     },
     { 
       icon: <Dumbbell />, 
       label: "Fitness Journey", 
       description: "Workouts, nutrition & progress",
-      notifications: 2
+      notifications: 2,
+      details: "Daily workout plan ready"
     },
     { 
       icon: <Utensils />, 
       label: "Nutrition AI", 
       description: "Personalized meal plans & tracking",
-      notifications: 0
+      notifications: 0,
+      details: "Today's meal plan generated"
     },
     { 
       icon: <Users />, 
       label: "Family Health", 
       description: "Manage family medical records",
-      notifications: 1
+      notifications: 1,
+      details: "Sarah's vaccination due"
     },
     { 
       icon: <Wallet />, 
       label: "Insurance Hub", 
       description: "Claims, coverage & expenses",
-      notifications: 2
+      notifications: 2,
+      details: "2 pending claims"
     },
     { 
       icon: <TreePine />, 
       label: "Lifestyle", 
       description: "Work-life balance & habits",
-      notifications: 0
+      notifications: 0,
+      details: "Sleep quality: 85%"
     },
     { 
       icon: <Target />, 
       label: "Goals & Plans", 
       description: "Health objectives & milestones",
-      notifications: 4
+      notifications: 4,
+      details: "4 goals need attention"
     },
     { 
       icon: <Laptop />, 
       label: "Telemedicine", 
       description: "Virtual consultations & chats",
-      notifications: 1
+      notifications: 1,
+      details: "Follow-up in 2 days"
     },
     { 
       icon: <Dna />, 
       label: "Genomics", 
       description: "DNA insights & personalized care",
-      notifications: 0
+      notifications: 0,
+      details: "Genetic report ready"
     }
   ];
 
   const todayHighlights = [
     "🎯 Achieved 8,500 steps - 85% of daily goal",
+    "💧 Water intake: 1.5L/2.5L - Reminder set for 2:00 PM",
+    "🥗 Lunch: Mediterranean diet - 450 calories",
     "💊 All morning medications taken",
     "🩺 Dr. Smith appointment confirmed for 2:30 PM",
     "❤️ Blood pressure trending normal this week",
     "🧘‍♂️ Complete 2 mindfulness sessions",
-    "🥗 Stay under 2000mg sodium today"
+    "🥗 Stay under 2000mg sodium today",
+    "💪 30-min strength training completed",
+    "🌡️ Temperature check: 98.6°F"
   ];
 
   const upcomingTasks = [
@@ -124,8 +137,60 @@ const Dashboard = () => {
     "Refill Prescription #4589 - 3 days left",
     "Annual Physical Examination - Next week",
     "Dental Cleaning - In 2 weeks",
-    "Update Insurance Information - This month"
+    "Update Insurance Information - This month",
+    "Schedule Eye Examination - This month",
+    "Wellness Workshop - Next Tuesday"
   ];
+
+  const hydrationStats = {
+    current: 1.5,
+    target: 2.5,
+    nextReminder: "2:00 PM",
+    streak: 5,
+    history: [
+      { time: "8:00 AM", amount: 0.5 },
+      { time: "10:30 AM", amount: 0.5 },
+      { time: "12:00 PM", amount: 0.5 }
+    ]
+  };
+
+  const nutritionStats = {
+    calories: {
+      consumed: 1250,
+      target: 2000,
+      remaining: 750
+    },
+    meals: [
+      {
+        time: "8:00 AM",
+        name: "Breakfast",
+        items: "Oatmeal with berries, Greek yogurt",
+        calories: 350,
+        nutrients: "Protein: 15g, Carbs: 45g, Fats: 8g"
+      },
+      {
+        time: "12:00 PM",
+        name: "Lunch",
+        items: "Mediterranean salad, whole grain bread",
+        calories: 450,
+        nutrients: "Protein: 20g, Carbs: 55g, Fats: 15g"
+      }
+    ],
+    upcoming: [
+      {
+        time: "3:30 PM",
+        name: "Snack",
+        suggestion: "Apple with almond butter",
+        calories: 200
+      },
+      {
+        time: "6:30 PM",
+        name: "Dinner",
+        suggestion: "Grilled salmon with quinoa",
+        calories: 550
+      }
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F2FCE2] to-[#D3E4FD] p-4 md:p-8">
@@ -188,7 +253,7 @@ const Dashboard = () => {
                 View Schedule
               </Button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               <div className="bg-secondary/30 rounded-lg p-4">
                 <h3 className="font-medium mb-2 flex items-center gap-2">
                   <Target className="w-4 h-4 text-primary" />
@@ -210,6 +275,42 @@ const Dashboard = () => {
                     <li key={index} className="text-sm text-gray-600">{task}</li>
                   ))}
                 </ul>
+              </div>
+              <div className="bg-secondary/30 rounded-lg p-4">
+                <h3 className="font-medium mb-2 flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-primary" />
+                  Quick Stats
+                </h3>
+                <div className="space-y-4">
+                  {/* Water Intake */}
+                  <div>
+                    <div className="flex justify-between text-sm text-gray-600 mb-1">
+                      <span>Water Intake</span>
+                      <span>{hydrationStats.current}L / {hydrationStats.target}L</span>
+                    </div>
+                    <div className="h-2 bg-blue-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-blue-500 rounded-full transition-all"
+                        style={{ width: `${(hydrationStats.current / hydrationStats.target) * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">Next reminder: {hydrationStats.nextReminder}</p>
+                  </div>
+                  {/* Calories */}
+                  <div>
+                    <div className="flex justify-between text-sm text-gray-600 mb-1">
+                      <span>Calories</span>
+                      <span>{nutritionStats.calories.consumed} / {nutritionStats.calories.target}</span>
+                    </div>
+                    <div className="h-2 bg-green-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-green-500 rounded-full transition-all"
+                        style={{ width: `${(nutritionStats.calories.consumed / nutritionStats.calories.target) * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">{nutritionStats.calories.remaining} calories remaining</p>
+                  </div>
+                </div>
               </div>
             </div>
           </Card>
@@ -236,6 +337,7 @@ const Dashboard = () => {
                   <span className="text-xs text-gray-500 text-center line-clamp-2 min-h-[2.5rem]">
                     {feature.description}
                   </span>
+                  <span className="text-xs text-gray-500 text-center mt-1">{feature.details}</span>
                 </Button>
               ))}
             </div>
